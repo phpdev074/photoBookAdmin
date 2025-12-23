@@ -77,7 +77,7 @@ const planColors = {
   Premium: 'bg-purple-100 text-purple-800',
 };
 
-export function SubscribedUsers() {
+export function SubscriptionManager() {
   const [subscribers] = useState<Subscriber[]>(initialSubscribers);
   const [searchQuery, setSearchQuery] = useState('');
 

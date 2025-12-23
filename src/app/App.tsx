@@ -4,10 +4,11 @@ import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { Dashboard } from './components/Dashboard';
 import { UsersList } from './components/UsersList';
-import { SubscribedUsers } from './components/SubscribedUsers';
+
 import { Packages } from './components/Packages';
 import { Profile } from './components/Profile';
 import { Toaster } from './components/ui/sonner';
+import SubscriptionManager from './components/SubscribedUsers';
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -39,7 +40,7 @@ export default function App() {
       case 'users':
         return <UsersList />;
       case 'subscribers':
-        return <SubscribedUsers />;
+        return <SubscriptionManager />;
       case 'packages':
         return <Packages />;
       case 'profile':
