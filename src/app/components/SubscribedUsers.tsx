@@ -22,17 +22,13 @@ export default function SubscriptionManager() {
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editForm, setEditForm] = useState<Partial<Subscription>>({});
-  const [language, setLanguage] = useState<'en' | 'sp'>('en');
+  const [language, setLanguage] = useState<'en' | 'es'>('en');
 
   // Fetch subscriptions
   const fetchSubscriptions = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/subscription`, {
-        headers: {
-          'Accept-Language': language,
-        },
-      });
+      const response = await fetch(`${API_BASE_URL}/subscription?lang=${language}`);
       const result = await response.json();
       setSubscriptions(result.data || []);
     } catch (error) {
@@ -72,12 +68,11 @@ export default function SubscriptionManager() {
   const handleUpdate = async (id: string) => {
     try {
       const response = await fetch(
-        `${API_BASE_URL}/subscription/update-subscription?id=${id}`,
+        `${API_BASE_URL}/subscription/update-subscription?id=${id}&lang=${language}`,
         {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            'Accept-Language': language,
           },
           body: JSON.stringify(editForm),
         }
@@ -146,8 +141,8 @@ export default function SubscriptionManager() {
             English
           </Button>
           <Button
-            variant={language === 'sp' ? 'default' : 'outline'}
-            onClick={() => setLanguage('sp')}
+            variant={language === 'es' ? 'default' : 'outline'}
+            onClick={() => setLanguage('es')}
             size="sm"
           >
             Español
